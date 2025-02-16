@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
+
 <style>
     /* Navbar container styles */
     .navbar {
@@ -71,18 +72,16 @@ if (session_status() === PHP_SESSION_NONE) {
 </style>
 
 <div class="navbar">
-    <h1>Child Vaccination </h1>
+    <h1>Child Vaccination</h1>
     <div>
         <a href="home.php">Home</a>
-        <a href="babycare.php">Baby care</a>
         
-        <!-- Check if the user is logged in, then show the welcome message and logout link -->
+        <!-- Only show the Baby Care link if the user is logged in -->
         <?php if (isset($_SESSION['user_id'])): ?>
+            <a href="babycare.php">Baby Care</a>
             <span>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
             <a href="logout.php">Logout</a>
-            <!-- "Book a Bike" link is only shown if the user is logged in -->
         <?php else: ?>
-            <!-- If the user is not logged in, show login link -->
             <a href="login.php">Login</a>
         <?php endif; ?>
     </div>

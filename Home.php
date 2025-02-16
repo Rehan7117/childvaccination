@@ -4,7 +4,7 @@ session_start();
 include 'navbar.php'; // Include navigation bar
 
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'anzar');
+$conn = new mysqli('localhost', 'root', '', 'child');
 
 // Check connection
 if ($conn->connect_error) {

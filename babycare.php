@@ -2,6 +2,12 @@
 // Start session
 session_start();
 
+// Check if the user is logged in, otherwise redirect to login page
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 // Database connection
 $conn = new mysqli('localhost', 'root', '', 'child'); // Connect to the 'child' database
 
@@ -37,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vaccine Booking</title>
+    <?php include 'navbar.php'; ?>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         h1 {
             text-align: center;
-            color: #333;
         }
 
         form {
@@ -118,12 +125,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="container">
     <h1>Vaccine Booking</h1>
+
+    <!-- Show messages for success or error -->
     <?php if (isset($successMessage)): ?>
         <div class="message success"><?php echo $successMessage; ?></div>
     <?php elseif (isset($errorMessage)): ?>
         <div class="message error"><?php echo $errorMessage; ?></div>
     <?php endif; ?>
 
+    <!-- Vaccine booking form -->
     <form method="POST" action="">
         <div class="form-group">
             <label for="name">Full Name</label>
